@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 4000,
+            "driver": "PostgreSQL",
+            "name": "willhaben",
+            "database": "webtech-project",
+            "username": "willhaben-backend",
+            "password": "test123"
+        }
+    ]
+}
