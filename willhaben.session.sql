@@ -40,3 +40,41 @@ VALUES (
     NULL,
     1
   );
+
+  INSERT INTO motorbikes (
+    id,
+    "Type",
+    "Marke",
+    "Model"
+  )
+VALUES (
+    '04794ee3-0994-4b1f-904f-cc69b6157577',
+    'Moped',
+    'Aprilia',
+    'SX'
+  );
+    INSERT INTO motorbikes (
+    id,
+    "Type",
+    "Marke",
+    "Model"
+  )
+VALUES (
+    'be3ac561-dcf2-4e18-9cb2-a793936c3159',
+    'Motocross',
+    'KTM',
+    '250'
+  );
+
+CREATE TABLE public.verkaeufer (
+        id uuid PRIMARY KEY,
+        "carID" uuid,
+        "motorbikeID" uuid,
+        
+        CONSTRAINT fk_car FOREIGN KEY ("carID") REFERENCES public.cars(id),
+        CONSTRAINT fk_motorbike FOREIGN KEY ("motorbikeID") REFERENCES public.motorbikes(id),
+        CONSTRAINT check_one_reference CHECK (
+        ("carID" IS NOT NULL)::int +
+        ("motorbikeID" IS NOT NULL)::int = 1
+    )
+)
