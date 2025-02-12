@@ -78,3 +78,20 @@ CREATE TABLE public.verkaeufer (
         ("motorbikeID" IS NOT NULL)::int = 1
     )
 )
+
+
+CREATE TABLE motorbikes_to_sell (
+    id UUID PRIMARY KEY,                  
+    description TEXT,                    
+    fuel CHARACTER VARYING(50),          
+    price DOUBLE PRECISION,              
+    registrationDate DATE,               
+    mileage INTEGER,                     
+    color CHARACTER VARYING(50),         
+    condition CHARACTER VARYING(50),     
+    motorbike_id UUID NOT NULL,          
+    
+    CONSTRAINT fk_motorbike FOREIGN KEY (motorbike_id)
+        REFERENCES motorbikes (id)       
+        ON DELETE CASCADE                
+);
