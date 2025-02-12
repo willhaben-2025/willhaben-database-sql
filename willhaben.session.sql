@@ -95,3 +95,33 @@ CREATE TABLE motorbikes_to_sell (
         REFERENCES motorbikes (id)       
         ON DELETE CASCADE                
 );
+
+DROP TABLE public.verkaeufer;
+
+CREATE TABLE public.verkaeufer (
+        id uuid PRIMARY KEY,
+        "carID" uuid,
+        "motorbikeID" uuid,
+        
+        CONSTRAINT fk_car FOREIGN KEY ("carID") REFERENCES public."cars-to-sell"(id),
+        CONSTRAINT fk_motorbike FOREIGN KEY ("motorbikeID") REFERENCES public."motorbikes-to-sell"(id),
+        CONSTRAINT check_one_reference CHECK (
+        ("carID" IS NOT NULL)::int +
+        ("motorbikeID" IS NOT NULL)::int = 1
+    )
+)
+DROP TABLE public.verkaeufer;
+CREATE TABLE public.verkaeufer (
+        id uuid PRIMARY KEY,
+        userid integer,
+        "carID" uuid,
+        "motorbikeID" uuid,
+
+        CONSTRAINT fk_user FOREIGN KEY (userid) REFERENCES public.users(id),
+        CONSTRAINT fk_car FOREIGN KEY ("carID") REFERENCES public."cars-to-sell"(id),
+        CONSTRAINT fk_motorbike FOREIGN KEY ("motorbikeID") REFERENCES public."motorbikes_to_sell"(id),
+        CONSTRAINT check_one_reference CHECK (
+        ("carID" IS NOT NULL)::int +
+        ("motorbikeID" IS NOT NULL)::int = 1
+    )
+)
